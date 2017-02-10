@@ -3,7 +3,8 @@
 <head>
     <title>Suggestion Box</title>
     <script src="js/vendor/angular.min.js"></script>
-    <script type="text/javascript" src="js/vendor/angular-route.min.js"></script>
+    <script src="js/vendor/angular-route.min.js"></script>
+    <script src="bower_components/angular-spinner/dist/angular-spinner.js"></script>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 </head>
@@ -11,12 +12,14 @@
 <body ng-app="SuggestionBox" ng-controller="HomeController">
 
 <div class="jumbotron">
-    <h1>Suggestion Box</h1>
+    <h1><span class="glyphicon glyphicon-search"></span> Suggestion Box</h1>
 </div>
 
 <!-- <h1> {{ helloWorld }} </h1> -->
 
 <div ng-view></div>
+
+<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1" class="centered"></span>
 
 <!-- Modules -->
 <script type="text/javascript" src="js/app.js"></script>

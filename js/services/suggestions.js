@@ -1,4 +1,4 @@
-app.factory('suggestions', [function() {
+app.factory('suggestions', ['$q', function($q) {
     var data = [
         {
             id: '1',
@@ -26,19 +26,38 @@ app.factory('suggestions', [function() {
         }
     ];
 
+    var cachedData = [];
+
     var api = {};
     api.getPosts = function() {
-        return data
+        var deferred = $q.defer();
+        setTimeout(function() {
+            cachedData = [];
+            for (var i = 0; i < data.length; i++) {
+                cachedData.push(data[i]);
+            }
+            deferred.resolve(cachedData);
+        }, 3000);
+        return deferred.promise;
+    };
+
+    api.getCachedPosts = function() {
+        return cachedData;
     };
 
     api.addPost = function(post) {
-        post.id = data.length + 1 + '';
-        data.push(post)
+        var deferred = $q.defer();
+        post.id = cachedData.length + 1 + '';
+        setTimeout(function() {
+            data.push(post);
+            deferred.resolve(post.id);
+        }, 2000);
+        return deferred.promise;
     };
 
-    api.findPost = function(id) {
-        for (var i = 0; i < data.length; i++) {
-            var post = data[i];
+    api.findCachedPost = function(id) {
+        for (var i = 0; i < cachedData.length; i++) {
+            var post = cachedData[i];
             if (post.id === id) {
                 return post;
             }
@@ -46,7 +65,11 @@ app.factory('suggestions', [function() {
     };
 
     api.updatePost = function(post) {
-
+        var deferred = $q.defer();
+        setTimeout(function() {
+            deferred.resolve(post.id);
+        }, 2000);
+        return deferred.promise;
     };
 
     return api;

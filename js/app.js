@@ -1,4 +1,4 @@
-var app = angular.module('SuggestionBox',['ngRoute']);
+var app = angular.module('SuggestionBox',['ngRoute', 'angularSpinner']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
